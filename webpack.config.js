@@ -1,18 +1,19 @@
-const path = require("path");
 
+
+const path = require("path");
 module.exports = {
-    mode: "development",
-    entry: path.resolve(__dirname, `src`, `app`, ),
+    mode: 'development',
+    entry: path.resolve(__dirname, 'src', 'app'),
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
-        publicPath: '/'
+        publicPath: '/',
     },
     resolve: {
-        extensions: [".jsx", '.jsx']
+        extensions: ['.js', '.jsx']
     },
     devServer: {
-        historyApiFallBack: true
+        historyApiFallback: true
     },
     module: {
         rules: [{
