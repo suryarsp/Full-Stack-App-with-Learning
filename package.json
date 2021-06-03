@@ -8,7 +8,9 @@
     "start": "webpack",
     "dev": "webpack-dev-server --open",
     "test-connect": "babel-node src/server/connect-db",
-    "initialize": "babel-node src/server/initialize-db"
+    "initialize": "babel-node src/server/initialize-db",
+    "server": "babel-node src/server/server",
+    "server-test": "babel-node src/server/server.spec"
   },
   "keywords": [],
   "author": "",
