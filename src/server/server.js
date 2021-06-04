@@ -29,13 +29,13 @@ app.use(
 //     response.send('Hello, world');
 // })
 
-export const addNewTask = async task => {
+export const addNewTask = async (task) => {
     let db = await connectDB();
     let collection = db.collection(TASKS);
     await collection.insertOne(task);
 }
 
-export const updatetask = async task => {
+export const updatetask = async (task) => {
     let { id, group, isComplete, name } = task;
     let db = await connectDB();
     let collection = db.collection(TASKS);
@@ -53,14 +53,14 @@ export const updatetask = async task => {
     }
 }
 
-app.post('/task/new', async (res, req) => {
+app.post('/task/new', async (req, res) => {
     let task = req.body.task;
     await addNewTask(task);
-    res.statusCode(200).send();
+    res.status(200).send();
 })
 
-app.post('/task/update', async (res, req) => {
+app.post('/task/update', async (req, res) => {
     let task = req.body.task;
     await updatetask(task);
-    res.statusCode(200).send();
+    res.status(200).send();
 })
