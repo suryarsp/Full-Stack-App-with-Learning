@@ -27,19 +27,32 @@ export function* taskCreationSaga() {
 }
 
 export function* taskModificationSaga() {
-   while (true) {
-       const task = yield take([
-           mutations.SET_TASK_GROUP,
-           mutations.SET_TASK_NAME,
-           mutations.SET_TASK_COMPLETE
+    while (true) {
+        const task = yield take([
+            mutations.SET_TASK_GROUP,
+            mutations.SET_TASK_NAME,
+            mutations.SET_TASK_COMPLETE
         ]);
-        axios.post(URL + '/task/update', 
-        {
-            task: {
-                id: task.taskID,
-                group: task.groupID,
-                isComplete: task.isComplete
-            }
-        });
-   }
+        axios.post(URL + '/task/update',
+            {
+                task: {
+                    id: task.taskID,
+                    group: task.groupID,
+                    isComplete: task.isComplete
+                }
+            });
+    }
+}
+
+export function* userAuthenticationSaga() {
+    while (true) {
+        const { username, password } = yield take(mutations.REQUEST_AUTHENTICATE_USER);
+        try {
+            const data = axios.post(url + '/authenticate', {username, password});
+            if(!data) throw new Error()
+        } catch (err) {
+            console.log(err);
+            yield put(mutations.processAuthenticateUser(mutations.NOT_AUTHENTICATED))
+        }
+    }
 }
