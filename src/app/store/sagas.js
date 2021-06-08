@@ -39,6 +39,7 @@ export function* taskModificationSaga() {
                 task: {
                     id: task.taskID,
                     group: task.groupID,
+                    name: task.name,
                     isComplete: task.isComplete
                 }
             });
