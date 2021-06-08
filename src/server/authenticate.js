@@ -37,6 +37,7 @@ export const authenticationRoute = app => {
 
         let token = uuidv4();
 
+        let authenticationTokens = [];
         authenticationTokens.push({
             token,
             userID: user.id

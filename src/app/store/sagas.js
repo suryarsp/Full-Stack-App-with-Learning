@@ -1,6 +1,7 @@
 import { take, put, select } from 'redux-saga/effects';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import {history} from './history';
 
 import * as mutations from './mutations';
 
@@ -48,11 +49,16 @@ export function* userAuthenticationSaga() {
     while (true) {
         const { username, password } = yield take(mutations.REQUEST_AUTHENTICATE_USER);
         try {
-            const data = axios.post(url + '/authenticate', {username, password});
-            if(!data) throw new Error()
+            const {data} = yield axios.post(URL + '/authenticate', {username, password});
+            if(!data) { throw new Error() };
+            console.log("Authentication passed");
+            yield put(mutations.setState(data.state));
+            yield put(mutations.processAuthenticateUser(mutations.AUTHENTICATED));
+            history.push('/dashboard');
         } catch (err) {
             console.log(err);
             yield put(mutations.processAuthenticateUser(mutations.NOT_AUTHENTICATED))
         }
+        
     }
 }
