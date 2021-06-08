@@ -6,7 +6,7 @@ import {history} from './history';
 import * as mutations from './mutations';
 
 
-const URL = "http://localhost:7777";
+const URL =  process.env.NODE_ENV === "production" ? "" : "http://localhost:7777";
 
 export function* taskCreationSaga() {
     while (true) {
